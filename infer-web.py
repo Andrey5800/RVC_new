@@ -1645,7 +1645,7 @@ with gr.Blocks(title="RVC WebUI") as app:
                 inputs=[sid0, protect0, protect1],
                 outputs=[spk_item, protect0, protect1, file_index2],
             )
-        with gr.TabItem(i18n("伴奏人声分离&去混响&去回声")):
+
             with gr.Group():
                 gr.Markdown(
                     value=i18n(
@@ -1939,7 +1939,7 @@ with gr.Blocks(title="RVC WebUI") as app:
                         api_name="train_start_all",
                     )
 
-        with gr.TabItem(i18n("ckpt处理")):
+
             with gr.Group():
                 gr.Markdown(value=i18n("模型融合, 可用于测试音色融合"))
                 with gr.Row():
@@ -2079,7 +2079,7 @@ with gr.Blocks(title="RVC WebUI") as app:
                     api_name="ckpt_extract",
                 )
 
-        with gr.TabItem(i18n("Onnx导出")):
+
             with gr.Row():
                 ckpt_dir = gr.Textbox(label=i18n("RVC模型路径"), value="", interactive=True)
             with gr.Row():
@@ -2094,8 +2094,8 @@ with gr.Blocks(title="RVC WebUI") as app:
                 export_onnx, [ckpt_dir, onnx_dir], infoOnnx, api_name="export_onnx"
             )
 
-        tab_faq = i18n("常见问题解答")
-        with gr.TabItem(tab_faq):
+
+
             try:
                 if tab_faq == "常见问题解答":
                     with open("docs/faq.md", "r", encoding="utf8") as f:
