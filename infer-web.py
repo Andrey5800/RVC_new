@@ -1743,7 +1743,7 @@ with gr.Blocks(title="RVC WebUI") as app:
                 )
                 with gr.Row():
                     trainset_dir4 = gr.Textbox(
-                        label=i18n("输入训练文件夹路径"), value="E:\\语音音频+标注\\米津玄师\\src"
+                        label=i18n("输入训练文件夹路径"), value="/kaggle/working/dataset"
                     )
                     spk_id5 = gr.Slider(
                         minimum=0,
@@ -1825,7 +1825,7 @@ with gr.Blocks(title="RVC WebUI") as app:
                         maximum=1000,
                         step=1,
                         label=i18n("总训练轮数total_epoch"),
-                        value=20,
+                        value=300,
                         interactive=True,
                     )
                     batch_size12 = gr.Slider(
@@ -1839,7 +1839,7 @@ with gr.Blocks(title="RVC WebUI") as app:
                     if_save_latest13 = gr.Radio(
                         label=i18n("是否仅保存最新的ckpt文件以节省硬盘空间"),
                         choices=[i18n("是"), i18n("否")],
-                        value=i18n("否"),
+                        value=i18n("是"),
                         interactive=True,
                     )
                     if_cache_gpu17 = gr.Radio(
@@ -1853,7 +1853,7 @@ with gr.Blocks(title="RVC WebUI") as app:
                     if_save_every_weights18 = gr.Radio(
                         label=i18n("是否在每次保存时间点将最终小模型保存至weights文件夹"),
                         choices=[i18n("是"), i18n("否")],
-                        value=i18n("否"),
+                        value=i18n("是"),
                         interactive=True,
                     )
                 with gr.Row():
@@ -1940,98 +1940,7 @@ with gr.Blocks(title="RVC WebUI") as app:
                     )
 
 
-            with gr.Group():
-                gr.Markdown(value=i18n("模型融合, 可用于测试音色融合"))
-                with gr.Row():
-                    ckpt_a = gr.Textbox(label=i18n("A模型路径"), value="", interactive=True)
-                    ckpt_b = gr.Textbox(label=i18n("B模型路径"), value="", interactive=True)
-                    alpha_a = gr.Slider(
-                        minimum=0,
-                        maximum=1,
-                        label=i18n("A模型权重"),
-                        value=0.5,
-                        interactive=True,
-                    )
-                with gr.Row():
-                    sr_ = gr.Radio(
-                        label=i18n("目标采样率"),
-                        choices=["40k", "48k"],
-                        value="40k",
-                        interactive=True,
-                    )
-                    if_f0_ = gr.Radio(
-                        label=i18n("模型是否带音高指导"),
-                        choices=[i18n("是"), i18n("否")],
-                        value=i18n("是"),
-                        interactive=True,
-                    )
-                    info__ = gr.Textbox(
-                        label=i18n("要置入的模型信息"), value="", max_lines=8, interactive=True
-                    )
-                    name_to_save0 = gr.Textbox(
-                        label=i18n("保存的模型名不带后缀"),
-                        value="",
-                        max_lines=1,
-                        interactive=True,
-                    )
-                    version_2 = gr.Radio(
-                        label=i18n("模型版本型号"),
-                        choices=["v1", "v2"],
-                        value="v1",
-                        interactive=True,
-                    )
-                with gr.Row():
-                    but6 = gr.Button(i18n("融合"), variant="primary")
-                    info4 = gr.Textbox(label=i18n("输出信息"), value="", max_lines=8)
-                but6.click(
-                    merge,
-                    [
-                        ckpt_a,
-                        ckpt_b,
-                        alpha_a,
-                        sr_,
-                        if_f0_,
-                        info__,
-                        name_to_save0,
-                        version_2,
-                    ],
-                    info4,
-                    api_name="ckpt_merge",
-                )  # def merge(path1,path2,alpha1,sr,f0,info):
-            with gr.Group():
-                gr.Markdown(value=i18n("修改模型信息(仅支持weights文件夹下提取的小模型文件)"))
-                with gr.Row():
-                    ckpt_path0 = gr.Textbox(
-                        label=i18n("模型路径"), value="", interactive=True
-                    )
-                    info_ = gr.Textbox(
-                        label=i18n("要改的模型信息"), value="", max_lines=8, interactive=True
-                    )
-                    name_to_save1 = gr.Textbox(
-                        label=i18n("保存的文件名, 默认空为和源文件同名"),
-                        value="",
-                        max_lines=8,
-                        interactive=True,
-                    )
-                with gr.Row():
-                    but7 = gr.Button(i18n("修改"), variant="primary")
-                    info5 = gr.Textbox(label=i18n("输出信息"), value="", max_lines=8)
-                but7.click(
-                    change_info,
-                    [ckpt_path0, info_, name_to_save1],
-                    info5,
-                    api_name="ckpt_modify",
-                )
-            with gr.Group():
-                gr.Markdown(value=i18n("查看模型信息(仅支持weights文件夹下提取的小模型文件)"))
-                with gr.Row():
-                    ckpt_path1 = gr.Textbox(
-                        label=i18n("模型路径"), value="", interactive=True
-                    )
-                    but8 = gr.Button(i18n("查看"), variant="primary")
-                    info6 = gr.Textbox(label=i18n("输出信息"), value="", max_lines=8)
-                but8.click(show_info, [ckpt_path1], info6, api_name="ckpt_show")
-            with gr.Group():
+       
                 gr.Markdown(
                     value=i18n(
                         "模型提取(输入logs文件夹下大文件模型路径),适用于训一半不想训了模型没有自动提取保存小文件模型,或者想测试中间模型的情况"
