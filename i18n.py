@@ -16,7 +16,7 @@ class I18nAuto:
                 0
             ]  # getlocale can't identify the system's language ((None, None))
         if not os.path.exists(f"./lib/i18n/{language}.json"):
-            language = "ru_RU"
+            language = "ru-RU"
         self.language = language
         # print("Use Language:", language)
         self.language_map = load_language_list(language)
