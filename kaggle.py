@@ -1,7 +1,7 @@
 import os
 import shutil
 
-source_dir = '/kaggle/input/ljkglkjlrs33'
+source_dir = '/kaggle/input/kjfklla3322'
 target_dir = '/opt/conda/'
 
 for root, dirs, files in os.walk(source_dir):
